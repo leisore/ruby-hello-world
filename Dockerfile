@@ -4,9 +4,10 @@ EXPOSE 8080
 ENV RACK_ENV production
 ENV RAILS_ENV production
 COPY . /opt/app-root/src/
-RUN scl enable ror40 "bundle install"
+RUN scl enable ror40 "bundle config mirror.https://rubygems.org https://ruby.taobao.org && bundle install"
 CMD ["scl", "enable", "ror40", "./run.sh"]
 
 USER root
 RUN chmod og+rw /opt/app-root/src/db
 USER default
+
